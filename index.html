@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Will You Be My Boyfriend?</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Poppins:wght@300;600&display=swap" rel="stylesheet">
+
+<style>
+
+body{
+font-family:'Poppins', sans-serif;
+text-align:center;
+height:100vh;
+display:flex;
+flex-direction:column;
+justify-content:center;
+align-items:center;
+overflow:hidden;
+
+/* animated romantic background */
+
+background: linear-gradient(-45deg,#ff9a9e,#fad0c4,#fbc2eb,#a18cd1);
+background-size:400% 400%;
+animation:gradientMove 10s ease infinite;
+}
+
+@keyframes gradientMove{
+0%{background-position:0% 50%;}
+50%{background-position:100% 50%;}
+100%{background-position:0% 50%;}
+}
+
+/* title */
+
+h1{
+font-family:'Pacifico', cursive;
+font-size:55px;
+color:white;
+text-shadow:0 5px 15px rgba(0,0,0,0.2);
+margin-bottom:10px;
+}
+
+/* image */
+
+img{
+width:380px;
+border-radius:20px;
+margin:20px;
+box-shadow:0 15px 40px rgba(0,0,0,0.3);
+}
+
+/* buttons */
+
+button{
+padding:18px 35px;
+font-size:22px;
+margin:12px;
+border:none;
+border-radius:14px;
+cursor:pointer;
+transition:0.3s;
+}
+
+#yes{
+background:#22c55e;
+color:white;
+}
+
+#no{
+background:#ef4444;
+color:white;
+}
+
+/* video */
+
+#videoContainer{
+display:none;
+margin-top:20px;
+}
+
+video{
+width:360px;
+border-radius:15px;
+}
+
+/* floating hearts */
+
+.heart{
+position:fixed;
+bottom:-20px;
+font-size:28px;
+animation:floatUp 5s linear infinite;
+}
+
+@keyframes floatUp{
+0%{transform:translateY(0);opacity:1;}
+100%{transform:translateY(-110vh);opacity:0;}
+}
+
+</style>
+</head>
+
+<body>
+
+<h1>Will You Be My Boyfriend? 💗</h1>
+
+<img src="IMG_3280.jpeg">
+
+<div>
+<button id="yes">YES 💕</button>
+<button id="no">NO 🫩</button>
+</div>
+
+<div id="videoContainer">
+
+<h2 style="color:white;">You said YES 🙃💗</h2>
+
+<video id="video" controls>
+<source src="We Are Young.mp4" type="video/mp4">
+</video>
+
+</div>
+
+<audio id="bgMusic" loop>
+<source src="Ariana Grande - Hampstead (lyric visualizer).mp3" type="audio/mp3">
+</audio>
+
+<script>
+
+const music = document.getElementById("bgMusic");
+const yesBtn = document.getElementById("yes");
+const noBtn = document.getElementById("no");
+const video = document.getElementById("video");
+const videoContainer = document.getElementById("videoContainer");
+
+/* start music when page is tapped */
+
+document.body.addEventListener("click", function(){
+music.play().catch(()=>{});
+},{once:true});
+
+/* NO button runs away */
+
+noBtn.addEventListener("mouseover", moveNo);
+noBtn.addEventListener("touchstart", moveNo);
+
+function moveNo(){
+
+const x = Math.random() * (window.innerWidth - 100);
+const y = Math.random() * (window.innerHeight - 50);
+
+noBtn.style.position="absolute";
+noBtn.style.left = x + "px";
+noBtn.style.top = y + "px";
+
+}
+
+/* YES button */
+
+yesBtn.onclick = function(){
+
+videoContainer.style.display="block";
+
+video.play();
+
+startHearts();
+
+}
+
+/* hearts */
+
+function startHearts(){
+
+setInterval(()=>{
+
+let heart=document.createElement("div");
+
+heart.className="heart";
+heart.innerHTML="💗";
+
+heart.style.left=Math.random()*100+"vw";
+heart.style.fontSize=(20+Math.random()*30)+"px";
+
+document.body.appendChild(heart);
+
+setTimeout(()=>{
+heart.remove();
+},5000);
+
+},300);
+
+}
+
+</script>
+
+</body>
+</html>
