@@ -18,24 +18,31 @@ align-items:center;
 overflow:hidden;
 }
 
+/* Bigger title */
+
 h1{
 color:white;
-font-size:40px;
+font-size:42px;
+margin-bottom:10px;
 }
+
+/* BIGGER IMAGE */
 
 img{
-width:220px;
+width:350px;
 border-radius:20px;
 margin:20px;
-box-shadow:0 10px 25px rgba(0,0,0,0.2);
+box-shadow:0 10px 30px rgba(0,0,0,0.25);
 }
 
+/* Buttons */
+
 button{
-padding:15px 30px;
+padding:18px 35px;
 font-size:22px;
 margin:10px;
 border:none;
-border-radius:12px;
+border-radius:14px;
 cursor:pointer;
 transition:0.3s;
 }
@@ -50,20 +57,24 @@ background:#ff4d4d;
 color:white;
 }
 
+/* Video section */
+
 #videoContainer{
 display:none;
 margin-top:20px;
 }
 
 video{
-width:340px;
+width:360px;
 border-radius:15px;
 }
+
+/* Hearts animation */
 
 .heart{
 position:fixed;
 color:red;
-font-size:25px;
+font-size:28px;
 animation:float 4s linear infinite;
 }
 
@@ -82,24 +93,26 @@ animation:float 4s linear infinite;
 <img src="IMG_3280.jpeg">
 
 <div>
-<button id="yes">YES!!! 💗</button>
-<button id="no">NO 🫩</button>
+<button id="yes">YES 💗</button>
+<button id="no">NO 😭</button>
 </div>
 
 <div id="videoContainer">
-<h2>You said YES 😉</h2>
+<h2>You said YES 🙃💗</h2>
+
 <video id="video" controls>
 <source src="We Are Young.mp4" type="video/mp4">
 </video>
+
 </div>
 
-<audio id="bgMusic" autoplay loop>
+<!-- Background Music -->
+
+<audio id="bgMusic" loop autoplay>
 <source src="Ariana Grande - Hampstead (lyric visualizer).mp3" type="audio/mp3">
 </audio>
 
 <script>
-
-let yesSize = 1;
 
 const yesBtn = document.getElementById("yes");
 const noBtn = document.getElementById("no");
@@ -107,62 +120,39 @@ const video = document.getElementById("video");
 const videoContainer = document.getElementById("videoContainer");
 const music = document.getElementById("bgMusic");
 
+/* Make music play when page loads */
 
-/* Helps music start on phone */
-document.body.addEventListener("click", function(){
+window.onload = function(){
 music.play().catch(()=>{});
-}, {once:true});
-
+}
 
 /* NO button runs away */
 
-noBtn.addEventListener("mouseover", moveNoButton);
-noBtn.addEventListener("touchstart", moveNoButton);
+noBtn.addEventListener("mouseover", moveNo);
+noBtn.addEventListener("touchstart", moveNo);
 
-function moveNoButton(){
+function moveNo(){
 
 const x = Math.random() * (window.innerWidth - 100);
 const y = Math.random() * (window.innerHeight - 50);
 
-noBtn.style.position = "absolute";
+noBtn.style.position="absolute";
 noBtn.style.left = x + "px";
 noBtn.style.top = y + "px";
 
 }
 
-
-/* If NO is somehow clicked */
-
-noBtn.onclick = function(){
-
-yesSize += 0.5;
-
-yesBtn.style.transform = "scale(" + yesSize + ")";
-
-}
-
-
 /* YES button */
 
 yesBtn.onclick = function(){
 
-yesBtn.style.position = "fixed";
-yesBtn.style.top = "50%";
-yesBtn.style.left = "50%";
-
-yesBtn.style.transform = "translate(-50%,-50%) scale(10)";
-yesBtn.style.transition = "0.6s";
-
-setTimeout(()=>{
-
 videoContainer.style.display="block";
+
 video.play();
+
 startHearts();
 
-},700);
-
-};
-
+}
 
 /* Floating hearts */
 
